@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  role          String    @default("MEMBER")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  member             Member?
+  eventRegistrations EventRegistration[]
+}
+
+model Member {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  firstName      String
+  lastName       String
+  photo          String?
+  bio            String?
+  specialization String   @default("[]")
+  country        String   @default("RU")
+  city           String?
+  phone          String?
+  website        String?
+  isPublic       Boolean  @default(true)
+  hasDiscount    Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Event {
+  id            String    @id @default(cuid())
+  slug          String    @unique
+  titleRu       String
+  titleEn       String?
+  descriptionRu String
+  descriptionEn String?
+  date          DateTime
+  location      String?
+  isOnline      Boolean   @default(false)
+  externalUrl   String?
+  maxSeats      Int?
+  published     Boolean   @default(false)
+  registrations EventRegistration[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model EventRegistration {
+  id               String   @id @default(cuid())
+  eventId          String
+  event            Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId           String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  notifiedTelegram Boolean  @default(false)
+  createdAt        DateTime @default(now())
+
+  @@unique([eventId, userId])
+}
+
+model Article {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  titleRu    String
+  titleEn    String?
+  contentRu  String
+  contentEn  String?
+  country    String   @default("RU")
+  tags       String   @default("[]")
+  published  Boolean  @default(false)
+  authorName String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model News {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  titleRu    String
+  titleEn    String?
+  contentRu  String
+  contentEn  String?
+  coverImage String?
+  published  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Ad {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  imageUrl    String?
+  videoUrl    String?
+  linkUrl     String
+  isPaid      Boolean   @default(false)
+  isActive    Boolean   @default(true)
+  expiresAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
