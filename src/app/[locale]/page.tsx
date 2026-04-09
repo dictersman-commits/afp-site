@@ -10,148 +10,236 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
       ? 'Азиатская Федерация Психологов — asianpsyche.org'
       : 'Asian Federation of Psychologists — asianpsyche.org',
     description: locale === 'ru'
-      ? 'Международная профессиональная организация психологов и психотерапевтов Азии. Каталог специалистов, мероприятия, научная библиотека.'
-      : 'International professional organization of psychologists and psychotherapists of Asia. Specialist catalog, events, scientific library.',
+      ? 'Международная профессиональная организация психологов и психотерапевтов Азии.'
+      : 'International professional organization of psychologists and psychotherapists of Asia.',
   }
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
   const t = getDict(locale)
+  const isRu = locale === 'ru'
 
-  const [membersCount, upcomingEvents, latestNews] = await Promise.all([
+  const [membersCount, eventsCount, upcomingEvents, latestNews] = await Promise.all([
     prisma.member.count({ where: { isPublic: true } }),
-    prisma.event.findMany({ where: { published: true, date: { gte: new Date() } }, orderBy: { date: 'asc' }, take: 3 }),
+    prisma.event.count({ where: { published: true } }),
+    prisma.event.findMany({ where: { published: true }, orderBy: { date: 'asc' }, take: 3 }),
     prisma.news.findMany({ where: { published: true }, orderBy: { createdAt: 'desc' }, take: 3 }),
   ])
 
+  const cardStyle = {
+    background: 'var(--afp-green-light)',
+    borderRadius: 16,
+    overflow: 'hidden' as const,
+  }
+
   return (
     <>
-      {/* Hero */}
-      <section style={{
-        background: 'linear-gradient(135deg, var(--afp-blue) 0%, var(--afp-teal) 100%)',
-        color: '#fff', padding: '5rem 1.5rem', textAlign: 'center',
-      }}>
-        <div style={{ maxWidth: 800, margin: '0 auto' }}>
-          <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', fontWeight: 700, marginBottom: '1rem', lineHeight: 1.2 }}>
-            {t.home.hero_title}
-          </h1>
-          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', opacity: 0.9, marginBottom: '2.5rem', lineHeight: 1.6 }}>
-            {t.home.hero_subtitle}
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href={`/${locale}/auth/register`} style={{
-              padding: '0.875rem 2rem', background: '#fff',
-              color: 'var(--afp-blue)', borderRadius: 6, fontWeight: 700, fontSize: '1rem',
-            }}>
-              {t.home.hero_cta}
-            </Link>
-            <Link href={`/${locale}/catalog`} style={{
-              padding: '0.875rem 2rem', border: '2px solid rgba(255,255,255,0.7)',
-              color: '#fff', borderRadius: 6, fontSize: '1rem',
-            }}>
-              {t.home.hero_cta_secondary}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section style={{ background: 'var(--afp-bg)', padding: '2.5rem 1.5rem' }}>
-        <div style={{
-          maxWidth: 900, margin: '0 auto',
-          display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '1.5rem', textAlign: 'center',
-        }}>
-          {[
-            { value: membersCount.toString(), label: t.home.members_count },
-            { value: '10', label: t.home.countries_count },
-            { value: upcomingEvents.length.toString() + '+', label: t.home.events_count },
-          ].map(({ value, label }) => (
-            <div key={label}>
-              <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--afp-blue)' }}>{value}</div>
-              <div style={{ color: 'var(--afp-muted)', fontSize: '0.9rem', marginTop: '0.25rem' }}>{label}</div>
+      {/* ── HERO ── */}
+      <section style={{ background: 'var(--afp-green-pale)', padding: '3rem 1.5rem 2rem' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'center' }}>
+            {/* Left */}
+            <div style={{ ...cardStyle, padding: '2.5rem 2rem' }}>
+              <span style={{
+                display: 'inline-block', background: 'var(--afp-dark)',
+                color: '#fff', fontSize: '0.75rem', padding: '0.25rem 0.75rem',
+                borderRadius: 20, marginBottom: '1.25rem',
+              }}>
+                asianpsyche.org
+              </span>
+              <h1 style={{
+                fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 700,
+                color: 'var(--afp-dark)', lineHeight: 1.2, marginBottom: '1rem',
+              }}>
+                {t.home.hero_title}
+              </h1>
+              <p style={{ color: 'var(--afp-muted)', lineHeight: 1.7, marginBottom: '2rem', fontSize: '1rem' }}>
+                {t.home.hero_subtitle}
+              </p>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <Link href={`/${locale}/auth/register`} style={{
+                  padding: '0.7rem 1.5rem', background: 'var(--afp-dark)',
+                  color: '#fff', borderRadius: 8, fontWeight: 600, fontSize: '0.9rem',
+                }}>
+                  {t.home.hero_cta}
+                </Link>
+                <Link href={`/${locale}/catalog`} style={{
+                  padding: '0.7rem 1.5rem', border: '1.5px solid var(--afp-dark)',
+                  color: 'var(--afp-dark)', borderRadius: 8, fontWeight: 600, fontSize: '0.9rem',
+                }}>
+                  {t.home.hero_cta_secondary}
+                </Link>
+              </div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* About */}
-      <section style={{ padding: '4rem 1.5rem' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center' }}>
-          <div>
-            <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-blue)', marginBottom: '1rem' }}>
-              {t.home.about_title}
-            </h2>
-            <p style={{ color: 'var(--afp-muted)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
-              {t.home.about_text}
-            </p>
-            <Link href={`/${locale}/about`} style={{
-              display: 'inline-block', padding: '0.6rem 1.5rem',
-              background: 'var(--afp-blue)', color: '#fff', borderRadius: 6, fontWeight: 600,
+            {/* Right — photo placeholder */}
+            <div style={{
+              borderRadius: 16, overflow: 'hidden', height: 320,
+              background: 'linear-gradient(135deg, #3a6b4a, #2d5a3d)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              {locale === 'ru' ? 'Подробнее' : 'Learn more'}
-            </Link>
+              <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🌿</div>
+                <div>{isRu ? 'Фото команды' : 'Team photo'}</div>
+              </div>
+            </div>
           </div>
-          <div style={{
-            background: 'var(--afp-bg)', borderRadius: 12, padding: '2rem',
-            borderLeft: '4px solid var(--afp-teal)',
-          }}>
-            <p style={{ fontStyle: 'italic', lineHeight: 1.8, color: 'var(--afp-muted)' }}>
-              {locale === 'ru'
-                ? '«АФП объединяет психологов и психотерапевтов из России, Казахстана, Китая, ОАЭ, Монголии и других стран Азии для развития профессии и науки.»'
-                : '«AFP unites psychologists and psychotherapists from Russia, Kazakhstan, China, UAE, Mongolia and other Asian countries to advance the profession and science.»'}
-            </p>
+
+          {/* Stats */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginTop: '1.5rem' }}>
+            {[
+              { value: `${membersCount}`, label: t.home.members_count, dark: false },
+              { value: '10', label: t.home.countries_count, dark: true },
+              { value: `${eventsCount}+`, label: t.home.events_count, dark: false },
+            ].map(({ value, label, dark }) => (
+              <div key={label} style={{
+                ...cardStyle,
+                background: dark ? 'var(--afp-dark)' : 'var(--afp-green-light)',
+                padding: '1.5rem',
+              }}>
+                <div style={{ fontSize: '2.25rem', fontWeight: 800, color: dark ? '#fff' : 'var(--afp-dark)', lineHeight: 1 }}>
+                  {value}
+                </div>
+                <div style={{ color: dark ? 'rgba(255,255,255,0.7)' : 'var(--afp-muted)', fontSize: '0.85rem', marginTop: '0.4rem' }}>
+                  {label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Catalog CTA */}
-      <section style={{ background: 'var(--afp-bg)', padding: '4rem 1.5rem' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-blue)', marginBottom: '1rem' }}>
-            {t.home.catalog_title}
+      {/* ── О ФЕДЕРАЦИИ ── */}
+      <section style={{ padding: '4rem 1.5rem', background: 'var(--afp-bg)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-dark)', marginBottom: '1.5rem' }}>
+            {t.home.about_title}
           </h2>
-          <p style={{ color: 'var(--afp-muted)', marginBottom: '1.5rem' }}>{t.home.catalog_text}</p>
-          <Link href={`/${locale}/catalog`} style={{
-            display: 'inline-block', padding: '0.75rem 2rem',
-            background: 'var(--afp-blue)', color: '#fff', borderRadius: 6, fontWeight: 700,
-          }}>
-            {locale === 'ru' ? 'Открыть каталог' : 'Browse directory'}
-          </Link>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', alignItems: 'start' }}>
+            {/* Left card */}
+            <div style={{ ...cardStyle, padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <p style={{ color: 'var(--afp-text)', lineHeight: 1.8, fontSize: '0.95rem' }}>
+                {t.home.about_text}
+              </p>
+              <div>
+                <Link href={`/${locale}/about`} style={{
+                  display: 'inline-block', padding: '0.6rem 1.25rem',
+                  background: 'var(--afp-dark)', color: '#fff',
+                  borderRadius: 8, fontWeight: 600, fontSize: '0.875rem',
+                }}>
+                  {isRu ? 'Подробнее' : 'Learn more'}
+                </Link>
+              </div>
+            </div>
+            {/* Right: photo + quote */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{
+                borderRadius: 16, overflow: 'hidden', height: 200,
+                background: 'linear-gradient(135deg, #4a7a5a, #2d5a3d)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>
+                  <div style={{ fontSize: '2.5rem', marginBottom: '0.25rem' }}>👥</div>
+                  <div>{isRu ? 'Фото конференции' : 'Conference photo'}</div>
+                </div>
+              </div>
+              <div style={{ ...cardStyle, padding: '1.25rem' }}>
+                <p style={{ fontStyle: 'italic', lineHeight: 1.7, color: 'var(--afp-muted)', fontSize: '0.9rem', margin: 0 }}>
+                  {isRu
+                    ? '«АФП объединяет психологов и психотерапевтов из России, Казахстана, Китая, ОАЭ, Монголии и других стран Азии для развития профессии и науки.»'
+                    : '"AFP unites psychologists and psychotherapists from Russia, Kazakhstan, China, UAE, Mongolia and other Asian countries."'}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Events preview */}
+      {/* ── НАЙДИТЕ СПЕЦИАЛИСТА ── */}
+      <section style={{ padding: '0 1.5rem 4rem' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{
+            background: 'var(--afp-dark)', borderRadius: 16, overflow: 'hidden',
+            display: 'grid', gridTemplateColumns: '1fr 1fr',
+          }}>
+            <div style={{ padding: '3rem 2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '1rem' }}>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1.3, margin: 0 }}>
+                {t.home.catalog_title}
+              </h2>
+              <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, margin: 0, fontSize: '0.95rem' }}>
+                {t.home.catalog_text}
+              </p>
+              <div>
+                <Link href={`/${locale}/catalog`} style={{
+                  display: 'inline-block', padding: '0.7rem 1.5rem',
+                  border: '1.5px solid rgba(255,255,255,0.6)', color: '#fff',
+                  borderRadius: 8, fontWeight: 600, fontSize: '0.875rem',
+                }}>
+                  {isRu ? 'Открыть каталог' : 'Browse catalog'}
+                </Link>
+              </div>
+            </div>
+            <div style={{
+              background: 'linear-gradient(135deg, #3a6b4a, #4a7a5a)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 240,
+            }}>
+              <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🧑‍⚕️</div>
+                <div>{isRu ? 'Фото специалиста' : 'Specialist photo'}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── БЛИЖАЙШИЕ МЕРОПРИЯТИЯ ── */}
       {upcomingEvents.length > 0 && (
-        <section style={{ padding: '4rem 1.5rem' }}>
+        <section style={{ padding: '4rem 1.5rem', background: 'var(--afp-bg)' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-              <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-blue)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-dark)', margin: 0 }}>
                 {t.home.events_title}
               </h2>
-              <Link href={`/${locale}/events`} style={{ color: 'var(--afp-teal)', fontWeight: 600 }}>
-                {locale === 'ru' ? 'Все мероприятия →' : 'All events →'}
+              <Link href={`/${locale}/events`} style={{ color: 'var(--afp-green)', fontWeight: 600, fontSize: '0.9rem' }}>
+                {isRu ? 'Все мероприятия →' : 'All events →'}
               </Link>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
-              {upcomingEvents.map(event => {
-                const title = locale === 'ru' ? event.titleRu : (event.titleEn ?? event.titleRu)
-                const tag = event.isOnline ? t.events.online : t.events.offline
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+              {upcomingEvents.map((event, i) => {
+                const title = isRu ? event.titleRu : (event.titleEn ?? event.titleRu)
+                const isDark = i === 2
                 return (
-                  <div key={event.id} style={{ border: '1px solid var(--afp-border)', borderRadius: 8, overflow: 'hidden' }}>
-                    <div style={{ background: 'var(--afp-blue)', padding: '1rem 1.25rem', color: '#fff' }}>
-                      <span style={{ background: 'rgba(255,255,255,0.2)', padding: '0.2rem 0.6rem', borderRadius: 12, fontSize: '0.75rem', display: 'inline-block', marginBottom: '0.5rem' }}>
-                        {tag}
+                  <div key={event.id} style={{
+                    background: isDark ? 'var(--afp-dark)' : 'var(--afp-green-light)',
+                    borderRadius: 14, padding: '1.5rem',
+                    display: 'flex', flexDirection: 'column', gap: '1rem',
+                  }}>
+                    <div>
+                      <span style={{
+                        display: 'inline-block', padding: '0.2rem 0.65rem',
+                        background: isDark ? 'rgba(255,255,255,0.15)' : 'var(--afp-dark)',
+                        color: '#fff', borderRadius: 20, fontSize: '0.72rem', fontWeight: 600,
+                        marginBottom: '0.75rem',
+                      }}>
+                        {event.isOnline ? t.events.online : t.events.offline}
                       </span>
-                      <p style={{ fontWeight: 600, lineHeight: 1.3 }}>{title}</p>
+                      <h3 style={{
+                        fontWeight: 700, fontSize: '1rem', lineHeight: 1.4,
+                        color: isDark ? '#fff' : 'var(--afp-dark)', margin: 0,
+                      }}>
+                        {title}
+                      </h3>
                     </div>
-                    <div style={{ padding: '1rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ color: 'var(--afp-muted)', fontSize: '0.85rem' }}>
-                        {new Date(event.date).toLocaleDateString(locale === 'ru' ? 'ru-RU' : 'en-US', { day: 'numeric', month: 'long' })}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
+                      <span style={{ fontSize: '0.8rem', color: isDark ? 'rgba(255,255,255,0.6)' : 'var(--afp-muted)' }}>
+                        {new Date(event.date).toLocaleDateString(isRu ? 'ru-RU' : 'en-US', { day: 'numeric', month: 'long' })}
                       </span>
-                      <Link href={`/${locale}/events`} style={{ color: 'var(--afp-teal)', fontSize: '0.85rem', fontWeight: 600 }}>
-                        {locale === 'ru' ? 'Записаться' : 'Register'} →
+                      <Link href={`/${locale}/events`} style={{
+                        display: 'inline-block', padding: '0.4rem 0.9rem',
+                        background: isDark ? 'rgba(255,255,255,0.15)' : 'var(--afp-dark)',
+                        color: '#fff', borderRadius: 6, fontSize: '0.8rem', fontWeight: 600,
+                      }}>
+                        {isRu ? 'Записаться →' : 'Register →'}
                       </Link>
                     </div>
                   </div>
@@ -162,29 +250,45 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         </section>
       )}
 
-      {/* News preview */}
+      {/* ── ПОСЛЕДНИЕ НОВОСТИ ── */}
       {latestNews.length > 0 && (
-        <section style={{ background: 'var(--afp-bg)', padding: '4rem 1.5rem' }}>
+        <section style={{ padding: '4rem 1.5rem', background: 'var(--afp-bg)' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-              <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-blue)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-dark)', margin: 0 }}>
                 {t.home.news_title}
               </h2>
-              <Link href={`/${locale}/news`} style={{ color: 'var(--afp-teal)', fontWeight: 600 }}>
-                {locale === 'ru' ? 'Все новости →' : 'All news →'}
+              <Link href={`/${locale}/news`} style={{ color: 'var(--afp-green)', fontWeight: 600, fontSize: '0.9rem' }}>
+                {isRu ? 'Все новости →' : 'All news →'}
               </Link>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
               {latestNews.map(news => {
-                const title = locale === 'ru' ? news.titleRu : (news.titleEn ?? news.titleRu)
+                const title = isRu ? news.titleRu : (news.titleEn ?? news.titleRu)
                 return (
-                  <div key={news.id} style={{ background: '#fff', border: '1px solid var(--afp-border)', borderRadius: 8, padding: '1.25rem' }}>
-                    <p style={{ fontWeight: 600, lineHeight: 1.4, marginBottom: '0.75rem' }}>{title}</p>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ color: 'var(--afp-muted)', fontSize: '0.8rem' }}>
-                        {new Date(news.createdAt).toLocaleDateString(locale === 'ru' ? 'ru-RU' : 'en-US', { day: 'numeric', month: 'long' })}
+                  <div key={news.id} style={{
+                    background: '#fff', borderRadius: 14, overflow: 'hidden',
+                    border: '1px solid var(--afp-border)',
+                    display: 'flex', flexDirection: 'column',
+                  }}>
+                    {/* Placeholder image */}
+                    <div style={{
+                      height: 140,
+                      background: 'linear-gradient(135deg, var(--afp-green-light), var(--afp-green-pale))',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      <span style={{ fontSize: '2.5rem' }}>📰</span>
+                    </div>
+                    <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                      <span style={{ color: 'var(--afp-muted)', fontSize: '0.75rem' }}>
+                        {new Date(news.createdAt).toLocaleDateString(isRu ? 'ru-RU' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
                       </span>
-                      <Link href={`/${locale}/news/${news.slug}`} style={{ color: 'var(--afp-teal)', fontSize: '0.85rem', fontWeight: 600 }}>
+                      <h3 style={{ fontWeight: 700, fontSize: '0.95rem', lineHeight: 1.4, color: 'var(--afp-dark)', margin: 0 }}>
+                        {title}
+                      </h3>
+                      <Link href={`/${locale}/news/${news.slug}`} style={{
+                        color: 'var(--afp-green)', fontSize: '0.85rem', fontWeight: 600, marginTop: 'auto',
+                      }}>
                         {t.news.read_more} →
                       </Link>
                     </div>

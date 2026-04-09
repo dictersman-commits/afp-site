@@ -1,15 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #1e293b;
-  --afp-blue: #1a4a7a;
-  --afp-blue-light: #2563a8;
-  --afp-teal: #0e7490;
-  --afp-bg: #f8fafc;
-  --afp-muted: #64748b;
-  --afp-border: #e2e8f0;
-  --afp-text: #1e293b;
+  --background: #f2ede3;
+  --foreground: #1a2a1e;
+
+  /* Green palette from design */
+  --afp-dark:         #1e3a28;   /* dark green — main brand */
+  --afp-green:        #2d5a3d;   /* medium green */
+  --afp-green-light:  #d4e8c2;   /* light green card bg */
+  --afp-green-pale:   #e8f0de;   /* very light green */
+  --afp-bg:           #f2ede3;   /* warm beige page bg */
+  --afp-bg-card:      #ffffff;
+  --afp-muted:        #5a6b5e;
+  --afp-border:       #d8e0d0;
+  --afp-text:         #1a2a1e;
+
+  /* Legacy aliases (used in other pages) */
+  --afp-blue:         #1e3a28;
+  --afp-blue-light:   #2d5a3d;
+  --afp-teal:         #2d5a3d;
 }
 
 @theme inline {
@@ -20,8 +29,8 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--afp-bg);
+  color: var(--afp-text);
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
   display: flex;
@@ -36,148 +45,63 @@ img { max-width: 100%; height: auto; }
    RESPONSIVE UTILITIES
    ======================== */
 
-/* Burger button — hidden on desktop */
 .burger-btn { display: none !important; }
-
-/* Mobile-only / Desktop-only */
 .mobile-only { display: none; }
 .desktop-only { display: flex; }
 
-/* Grid helpers */
-.grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.grid-sidebar { display: grid; grid-template-columns: 250px 1fr; gap: 2rem; }
-.grid-event-card { display: grid; grid-template-columns: 200px 1fr; }
-.grid-footer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-.grid-admin-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
-.grid-admin-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-
-/* Page container */
-.page-container { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; }
-.page-container-sm { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
-.page-container-xs { max-width: 600px; margin: 0 auto; padding: 3rem 1.5rem; }
-
-/* Admin table horizontal scroll on mobile */
+.grid-2col      { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-3col      { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.grid-sidebar   { display: grid; grid-template-columns: 250px 1fr; gap: 2rem; }
+.grid-footer    { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
 .admin-table-wrap { overflow-x: auto; }
 
+.page-container    { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; }
+.page-container-sm { max-width: 900px;  margin: 0 auto; padding: 3rem 1.5rem; }
+.page-container-xs { max-width: 600px;  margin: 0 auto; padding: 3rem 1.5rem; }
+
 /* ========================
-   MOBILE BREAKPOINT
+   MOBILE
    ======================== */
 @media (max-width: 768px) {
-  /* Burger */
   .burger-btn { display: block !important; }
-
-  /* Hide desktop nav */
-  header nav { display: none; }
-
-  /* Hide desktop auth actions in header */
+  header nav  { display: none; }
   .header-auth { display: none !important; }
-
-  /* Mobile/Desktop utility classes */
   .mobile-only { display: block; }
   .desktop-only { display: none; }
 
-  /* Grids → single column */
-  .grid-2col,
-  .grid-3col,
-  .grid-sidebar,
-  .grid-footer,
-  .grid-admin-2col { grid-template-columns: 1fr !important; }
+  .grid-2col, .grid-3col, .grid-sidebar, .grid-footer { grid-template-columns: 1fr !important; }
 
-  /* Event card — stack date block above content */
-  .grid-event-card { grid-template-columns: 1fr !important; }
-
-  /* Page padding */
   .page-container,
   .page-container-sm,
   .page-container-xs { padding: 1.5rem 1rem !important; }
 
-  /* Inline style grid overrides (fallback for components using inline styles) */
   [style*="grid-template-columns: 250px 1fr"],
-  [style*="gridTemplateColumns: '250px 1fr'"] {
-    grid-template-columns: 1fr !important;
-  }
-
   [style*="grid-template-columns: 200px 1fr"],
-  [style*="gridTemplateColumns: '200px 1fr'"] {
-    grid-template-columns: 1fr !important;
-  }
+  [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
 
-  [style*="grid-template-columns: 1fr 1fr"],
-  [style*="gridTemplateColumns: '1fr 1fr'"] {
-    grid-template-columns: 1fr !important;
-  }
+  [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
 
-  [style*="grid-template-columns: repeat(3, 1fr)"],
-  [style*="gridTemplateColumns: 'repeat(3, 1fr)'"] {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-
-  /* Admin member/registrations table rows */
   [style*="grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr"],
-  [style*="grid-template-columns: 2fr 2fr 1fr"] {
-    grid-template-columns: 1fr !important;
-    gap: 0.25rem;
-  }
+  [style*="grid-template-columns: 2fr 2fr 1fr"] { grid-template-columns: 1fr !important; gap: 0.25rem; }
 
-  /* Padding overrides */
   [style*="padding: '3rem 1.5rem'"],
   [style*="padding: '4rem 1.5rem'"] { padding: 1.5rem 1rem !important; }
   [style*="padding: '5rem 1.5rem'"] { padding: 2.5rem 1rem !important; }
 
-  /* Hero text size */
   [style*="fontSize: '3rem'"],
   [style*="fontSize: '2.5rem'"] { font-size: 1.75rem !important; }
+  [style*="fontSize: '2rem'"]   { font-size: 1.5rem !important; }
 
-  [style*="fontSize: '2rem'"] { font-size: 1.5rem !important; }
-
-  /* Flex rows → columns in hero CTA */
-  [style*="display: 'flex'"][style*="gap: '1rem'"] { flex-wrap: wrap; }
-
-  /* Max width full on mobile */
-  [style*="maxWidth: 1200"],
-  [style*="maxWidth: 900"],
-  [style*="maxWidth: 800"],
-  [style*="maxWidth: 1100"],
-  [style*="maxWidth: 1000"] { padding-left: 1rem !important; padding-right: 1rem !important; }
-
-  /* Footer grid */
   [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: 1fr 1fr !important; }
+  [style*="grid-template-columns: 2fr 1fr 1fr"]    { grid-template-columns: 1fr !important; }
 
-  /* Admin articles/news form grid */
-  [style*="grid-template-columns: 2fr 1fr 1fr"],
-  [style*="grid-template-columns: '2fr 1fr 1fr'"] { grid-template-columns: 1fr !important; }
+  [style*="repeat(auto-fill, minmax(280px, 1fr))"] { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important; }
 
-  /* Catalog card grid — 1 column on very small, 2 on medium mobile */
-  [style*="repeat(auto-fill, minmax(280px, 1fr))"] {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
-  }
-
-  /* Dashboard sidebar comes first on mobile */
-  .dashboard-sidebar-first { order: -1; }
-
-  /* Table overflow */
   .admin-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-  /* Form inputs full width */
-  input, select, textarea { width: 100%; }
-
-  /* Stat numbers smaller */
-  [style*="fontSize: '2rem'"][style*="fontWeight: 800"] { font-size: 1.5rem !important; }
 }
 
 @media (max-width: 480px) {
-  /* Footer → single column on very small screens */
   [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: 1fr !important; }
-
-  [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr 1fr !important; }
-
-  /* Event card date block height auto */
-  [style*="height: 80"] { height: auto !important; padding: 1rem !important; }
-
-  /* Catalog grid — 1 column */
   [style*="repeat(auto-fill, minmax(280px, 1fr))"],
-  [style*="repeat(auto-fill, minmax(240px, 1fr))"] {
-    grid-template-columns: 1fr !important;
-  }
+  [style*="repeat(auto-fill, minmax(240px, 1fr))"] { grid-template-columns: 1fr !important; }
 }
