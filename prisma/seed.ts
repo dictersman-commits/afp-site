@@ -45,6 +45,7 @@ async function main() {
       city: 'Москва',
       phone: '+7 (999) 123-45-67',
       website: 'https://ivanova-psy.ru',
+      photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
     },
     {
       email: 'petrov@example.com',
@@ -54,6 +55,7 @@ async function main() {
       specialization: ['Семейная психология', 'Психодрама'],
       country: 'RU',
       city: 'Санкт-Петербург',
+      photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces',
     },
     {
       email: 'chen@example.com',
@@ -64,6 +66,7 @@ async function main() {
       country: 'CN',
       city: 'Shanghai',
       website: 'https://weichen-psy.com',
+      photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces',
     },
     {
       email: 'alimova@example.com',
@@ -73,6 +76,7 @@ async function main() {
       specialization: ['Детская психология', 'Нейропсихология'],
       country: 'UZ',
       city: 'Ташкент',
+      photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=faces',
     },
     {
       email: 'nazarov@example.com',
@@ -82,6 +86,7 @@ async function main() {
       specialization: ['Консультирование', 'Зависимости'],
       country: 'KZ',
       city: 'Алматы',
+      photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces',
     },
   ]
 
@@ -104,6 +109,7 @@ async function main() {
             city: (m as { city?: string }).city ?? null,
             phone: (m as { phone?: string }).phone ?? null,
             website: (m as { website?: string }).website ?? null,
+            photo: (m as { photo?: string }).photo ?? null,
             isPublic: true,
           },
         },
@@ -167,6 +173,7 @@ async function main() {
       titleEn: 'AFP Joins the World Council for Psychotherapy',
       contentRu: 'Азиатская Федерация Психологов официально стала членом Всемирного совета по психотерапии (WCP). Это важный шаг в развитии международного сотрудничества и повышении стандартов психологической помощи в Азии.\n\nЧленство в WCP открывает новые возможности для профессионального развития наших членов, участия в международных конференциях и исследовательских проектах.',
       contentEn: 'The Asian Federation of Psychologists has officially become a member of the World Council for Psychotherapy (WCP). This is an important step in developing international cooperation and raising standards of psychological assistance in Asia.',
+      coverImage: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=600&fit=crop',
       published: true,
     },
     {
@@ -175,6 +182,7 @@ async function main() {
       titleEn: 'New AFP Specialist Catalog Launched',
       contentRu: 'Мы рады сообщить о запуске обновлённого каталога специалистов на нашем сайте. Теперь пользователи могут легко находить психологов и психотерапевтов по стране, городу и специализации.\n\nКаталог содержит профили специалистов из России, Казахстана, Узбекистана, Китая и других стран Азии.',
       contentEn: 'We are pleased to announce the launch of an updated specialist catalog on our website. Users can now easily find psychologists and psychotherapists by country, city, and specialization.',
+      coverImage: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&h=600&fit=crop',
       published: true,
     },
     {
@@ -183,6 +191,7 @@ async function main() {
       titleEn: 'Mental Health Awareness Month: AFP Events',
       contentRu: 'В октябре — Месяце психического здоровья — Азиатская Федерация Психологов проведёт серию бесплатных вебинаров и открытых лекций для широкой публики.\n\nМероприятия пройдут на русском и английском языках и будут доступны онлайн для всех желающих.',
       contentEn: 'In October — Mental Health Awareness Month — the Asian Federation of Psychologists will hold a series of free webinars and open lectures for the general public.',
+      coverImage: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=1200&h=600&fit=crop',
       published: true,
     },
   ]

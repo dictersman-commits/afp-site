@@ -40,10 +40,10 @@ export default function Header({ locale }: { locale: Locale }) {
 
           {/* Logo */}
           <Link href={`/${locale}`} style={{
-            fontWeight: 800, fontSize: '1.1rem', color: 'var(--afp-dark)',
-            flexShrink: 0, letterSpacing: '-0.02em',
-          }}>
-            АФП
+            display: 'flex', alignItems: 'center', flexShrink: 0,
+          }} aria-label="АФП — asianpsyche.org">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="АФП" style={{ height: 36, width: 'auto', display: 'block' }} />
           </Link>
 
           {/* Nav */}
@@ -69,7 +69,7 @@ export default function Header({ locale }: { locale: Locale }) {
           {/* Right */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
             {status !== 'loading' && session && (
-              <>
+              <div className="desktop-auth" style={{ display: 'flex', gap: '0.5rem' }}>
                 <Link href={`/${locale}/dashboard`} style={{
                   fontSize: '0.8rem', color: 'var(--afp-muted)', padding: '0.35rem 0.75rem',
                   border: '1px solid var(--afp-border)', borderRadius: 6,
@@ -83,7 +83,24 @@ export default function Header({ locale }: { locale: Locale }) {
                 }}>
                   {locale === 'ru' ? 'Выйти' : 'Sign out'}
                 </button>
-              </>
+              </div>
+            )}
+
+            {status !== 'loading' && !session && (
+              <div className="desktop-auth" style={{ display: 'flex', gap: '0.5rem' }}>
+                <Link href={`/${locale}/auth/login`} style={{
+                  fontSize: '0.8rem', color: 'var(--afp-muted)', padding: '0.35rem 0.75rem',
+                  border: '1px solid var(--afp-border)', borderRadius: 6,
+                }}>
+                  {t.nav.login}
+                </Link>
+                <Link href={`/${locale}/auth/register`} style={{
+                  fontSize: '0.8rem', color: '#fff', padding: '0.35rem 0.85rem',
+                  background: 'var(--afp-blue)', borderRadius: 6, fontWeight: 600,
+                }}>
+                  {t.nav.register}
+                </Link>
+              </div>
             )}
 
             {/* Lang switcher */}

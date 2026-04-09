@@ -72,16 +72,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 </Link>
               </div>
             </div>
-            {/* Right — photo placeholder */}
+            {/* Right — hero photo */}
             <div style={{
               borderRadius: 16, overflow: 'hidden', height: 320,
-              background: 'linear-gradient(135deg, #3a6b4a, #2d5a3d)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              position: 'relative',
             }}>
-              <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🌿</div>
-                <div>{isRu ? 'Фото команды' : 'Team photo'}</div>
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1000&h=800&fit=crop"
+                alt={isRu ? 'Медитация и осознанность' : 'Meditation and mindfulness'}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
             </div>
           </div>
 
@@ -135,13 +136,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{
                 borderRadius: 16, overflow: 'hidden', height: 200,
-                background: 'linear-gradient(135deg, #4a7a5a, #2d5a3d)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                position: 'relative',
               }}>
-                <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>
-                  <div style={{ fontSize: '2.5rem', marginBottom: '0.25rem' }}>👥</div>
-                  <div>{isRu ? 'Фото конференции' : 'Conference photo'}</div>
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=600&fit=crop"
+                  alt={isRu ? 'Конференция АФП' : 'AFP Conference'}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
               <div style={{ ...cardStyle, padding: '1.25rem' }}>
                 <p style={{ fontStyle: 'italic', lineHeight: 1.7, color: 'var(--afp-muted)', fontSize: '0.9rem', margin: 0 }}>
@@ -180,13 +182,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
               </div>
             </div>
             <div style={{
-              background: 'linear-gradient(135deg, #3a6b4a, #4a7a5a)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 240,
+              position: 'relative', minHeight: 240, overflow: 'hidden',
             }}>
-              <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🧑‍⚕️</div>
-                <div>{isRu ? 'Фото специалиста' : 'Specialist photo'}</div>
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=1000&h=800&fit=crop"
+                alt={isRu ? 'Консультация психолога' : 'Psychological consultation'}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
+              />
             </div>
           </div>
         </div>
@@ -271,13 +274,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                     border: '1px solid var(--afp-border)',
                     display: 'flex', flexDirection: 'column',
                   }}>
-                    {/* Placeholder image */}
-                    <div style={{
-                      height: 140,
-                      background: 'linear-gradient(135deg, var(--afp-green-light), var(--afp-green-pale))',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                      <span style={{ fontSize: '2.5rem' }}>📰</span>
+                    {/* Cover image */}
+                    <div style={{ height: 140, position: 'relative', overflow: 'hidden' }}>
+                      {news.coverImage ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={news.coverImage}
+                          alt={title}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                      ) : (
+                        <div style={{
+                          width: '100%', height: '100%',
+                          background: 'linear-gradient(135deg, var(--afp-green-light), var(--afp-green-pale))',
+                        }} />
+                      )}
                     </div>
                     <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                       <span style={{ color: 'var(--afp-muted)', fontSize: '0.75rem' }}>

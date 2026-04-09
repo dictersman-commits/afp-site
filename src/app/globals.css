@@ -66,6 +66,9 @@ img { max-width: 100%; height: auto; }
   .burger-btn { display: block !important; }
   header nav  { display: none; }
   .header-auth { display: none !important; }
+  .desktop-auth { display: none !important; }
+  .news-featured { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
+  .news-item { grid-template-columns: 1fr !important; gap: 1rem !important; }
   .mobile-only { display: block; }
   .desktop-only { display: none; }
 

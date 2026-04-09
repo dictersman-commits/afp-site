@@ -116,16 +116,26 @@ export default function CatalogClient({ members, locale, t }: Props) {
             }}>
               <div style={{
                 background: 'linear-gradient(135deg, var(--afp-blue), var(--afp-teal))',
-                height: 80, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                position: 'relative', overflow: 'hidden',
               }}>
-                <div style={{
-                  width: 60, height: 60, borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.2)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '1.5rem', fontWeight: 700, color: '#fff',
-                }}>
-                  {m.firstName[0]}{m.lastName[0]}
-                </div>
+                {m.photo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={m.photo}
+                    alt={`${m.firstName} ${m.lastName}`}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <div style={{
+                    width: 80, height: 80, borderRadius: '50%',
+                    background: 'rgba(255,255,255,0.2)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '2rem', fontWeight: 700, color: '#fff',
+                  }}>
+                    {m.firstName[0]}{m.lastName[0]}
+                  </div>
+                )}
               </div>
               <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
                 <h3 style={{ fontWeight: 700, marginBottom: '0.25rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
