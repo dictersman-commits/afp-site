@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     where: {
       published: true,
       ...(country ? { country: country as never } : {}),
-      ...(tag ? { tags: { has: tag } } : {}),
+      ...(tag ? { tags: { contains: tag } } : {}),
     },
     orderBy: { createdAt: 'desc' },
     select: {
