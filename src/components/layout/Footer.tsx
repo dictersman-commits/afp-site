@@ -8,12 +8,7 @@ export default function Footer({ locale }: { locale: Locale }) {
   return (
     <footer style={{ background: 'var(--afp-dark)', color: '#fff', marginTop: 'auto' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '3rem 1.5rem 1.5rem' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1.5fr 1fr 1fr 1fr',
-          gap: '2rem',
-          marginBottom: '2.5rem',
-        }}>
+        <div className="footer-grid">
           {/* Brand */}
           <div>
             <div style={{ fontWeight: 800, fontSize: '1.1rem', marginBottom: '0.4rem', letterSpacing: '-0.02em' }}>

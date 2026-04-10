@@ -38,7 +38,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       {/* ── HERO ── */}
       <section style={{ background: 'var(--afp-green-pale)', padding: '3rem 1.5rem 2rem' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'center' }}>
+          <div className="home-hero-grid">
             {/* Left */}
             <div style={{ ...cardStyle, padding: '2.5rem 2rem' }}>
               <span style={{
@@ -73,10 +73,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
               </div>
             </div>
             {/* Right — hero photo */}
-            <div style={{
-              borderRadius: 16, overflow: 'hidden', height: 320,
-              position: 'relative',
-            }}>
+            <div className="hero-photo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1000&h=800&fit=crop"
@@ -87,7 +84,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           </div>
 
           {/* Stats */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginTop: '1.5rem' }}>
+          <div className="home-stats-grid">
             {[
               { value: `${membersCount}`, label: t.home.members_count, dark: false },
               { value: '10', label: t.home.countries_count, dark: true },
@@ -116,7 +113,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-dark)', marginBottom: '1.5rem' }}>
             {t.home.about_title}
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', alignItems: 'start' }}>
+          <div className="home-about-grid">
             {/* Left card */}
             <div style={{ ...cardStyle, padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <p style={{ color: 'var(--afp-text)', lineHeight: 1.8, fontSize: '0.95rem' }}>
@@ -160,10 +157,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       {/* ── НАЙДИТЕ СПЕЦИАЛИСТА ── */}
       <section style={{ padding: '0 1.5rem 4rem' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{
-            background: 'var(--afp-dark)', borderRadius: 16, overflow: 'hidden',
-            display: 'grid', gridTemplateColumns: '1fr 1fr',
-          }}>
+          <div className="home-catalog-banner">
             <div style={{ padding: '3rem 2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '1rem' }}>
               <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1.3, margin: 0 }}>
                 {t.home.catalog_title}
@@ -181,9 +175,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 </Link>
               </div>
             </div>
-            <div style={{
-              position: 'relative', minHeight: 240, overflow: 'hidden',
-            }}>
+            <div className="catalog-photo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=1000&h=800&fit=crop"
@@ -207,7 +199,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 {isRu ? 'Все мероприятия →' : 'All events →'}
               </Link>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+            <div className="home-events-grid">
               {upcomingEvents.map((event, i) => {
                 const title = isRu ? event.titleRu : (event.titleEn ?? event.titleRu)
                 const isDark = i === 2
@@ -265,7 +257,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 {isRu ? 'Все новости →' : 'All news →'}
               </Link>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+            <div className="home-news-grid">
               {latestNews.map(news => {
                 const title = isRu ? news.titleRu : (news.titleEn ?? news.titleRu)
                 return (
