@@ -12,6 +12,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   }
 }
 
+const COUNCIL = [
+  { nameRu: 'Виктор Макаров',          nameEn: 'Viktor Makarov',          roleRu: 'Председатель Совета',  roleEn: 'Chairman of the Council', countryRu: 'Россия',    countryEn: 'Russia' },
+  { nameRu: 'Шанкар Гаутам',           nameEn: 'G. Shankar Gautam',       roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Индия',     countryEn: 'India' },
+  { nameRu: 'Гударзи',                 nameEn: 'Goodarzi',                roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Иран',      countryEn: 'Iran' },
+  { nameRu: 'Цян Мин Юэ',             nameEn: 'Qian Ming Yue',           roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Китай',     countryEn: 'China' },
+  { nameRu: 'Саски Йосинори',          nameEn: 'Sasaki Yoshinori',        roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Япония',    countryEn: 'Japan' },
+  { nameRu: 'Эдвард Чан',             nameEn: 'Edward Chan',             roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Гонконг',   countryEn: 'Hong Kong' },
+  { nameRu: 'Чжао Сюйдун',            nameEn: 'Zhao Xudong',             roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Китай',     countryEn: 'China' },
+]
+
 const COUNTRIES_RU = ['Россия', 'Казахстан', 'Узбекистан', 'Кыргызия', 'Таджикистан', 'Монголия', 'Китай', 'Иран', 'ОАЭ', 'Саудовская Аравия']
 const COUNTRIES_EN = ['Russia', 'Kazakhstan', 'Uzbekistan', 'Kyrgyzstan', 'Tajikistan', 'Mongolia', 'China', 'Iran', 'UAE', 'Saudi Arabia']
 
@@ -131,6 +141,47 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               borderLeft: '3px solid var(--afp-teal)', color: 'var(--afp-text)',
             }}>
               {country}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Council */}
+      <section style={{ marginBottom: '3rem' }}>
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--afp-blue)', marginBottom: '1.25rem' }}>
+          {isRu ? 'Совет федерации' : 'Federation Council'}
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1rem' }}>
+          {COUNCIL.map((member, i) => (
+            <div key={i} style={{
+              background: '#fff', border: '1px solid var(--afp-border)',
+              borderRadius: 10, padding: '1.25rem',
+              display: 'flex', flexDirection: 'column', gap: '0.4rem',
+            }}>
+              <div style={{
+                width: 44, height: 44, borderRadius: '50%',
+                background: i === 0 ? 'var(--afp-dark)' : 'var(--afp-green-light)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontWeight: 800, fontSize: '1rem',
+                color: i === 0 ? '#fff' : 'var(--afp-dark)',
+                marginBottom: '0.5rem',
+              }}>
+                {(isRu ? member.nameRu : member.nameEn).charAt(0)}
+              </div>
+              <div style={{ fontWeight: 700, color: 'var(--afp-dark)', fontSize: '0.95rem', lineHeight: 1.3 }}>
+                {isRu ? member.nameRu : member.nameEn}
+              </div>
+              <div style={{ color: 'var(--afp-muted)', fontSize: '0.8rem' }}>
+                {isRu ? member.roleRu : member.roleEn}
+              </div>
+              <div style={{
+                display: 'inline-block', marginTop: '0.25rem',
+                fontSize: '0.75rem', fontWeight: 600,
+                color: 'var(--afp-green)', borderLeft: '2px solid var(--afp-green)',
+                paddingLeft: '0.5rem',
+              }}>
+                {isRu ? member.countryRu : member.countryEn}
+              </div>
             </div>
           ))}
         </div>
