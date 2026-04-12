@@ -130,48 +130,70 @@ export default function Header({ locale }: { locale: Locale }) {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu overlay */}
       {menuOpen && (
-        <div style={{ background: '#fff', borderTop: '1px solid var(--afp-border)', padding: '1rem 1.5rem' }}>
-          {navLinks.map(({ href, label }) => (
-            <Link key={href} href={href} onClick={() => setMenuOpen(false)} style={{
-              display: 'block', padding: '0.65rem 0',
-              borderBottom: '1px solid var(--afp-border)', fontSize: '0.95rem', color: 'var(--afp-text)',
-            }}>
-              {label}
-            </Link>
-          ))}
-          {session ? (
-            <>
-              <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} style={{
-                display: 'block', padding: '0.65rem 0',
-                borderBottom: '1px solid var(--afp-border)', fontSize: '0.95rem',
+        <>
+          {/* Backdrop */}
+          <div
+            onClick={() => setMenuOpen(false)}
+            style={{
+              position: 'fixed', inset: 0, top: 56,
+              background: 'rgba(0,0,0,0.35)',
+              zIndex: 99,
+            }}
+          />
+          {/* Drawer */}
+          <div style={{
+            position: 'fixed', top: 56, left: 0, right: 0,
+            background: '#fff',
+            borderBottom: '1px solid var(--afp-border)',
+            padding: '0.5rem 1.5rem 1.5rem',
+            zIndex: 100,
+            maxHeight: 'calc(100vh - 56px)',
+            overflowY: 'auto',
+          }}>
+            {navLinks.map(({ href, label }) => (
+              <Link key={href} href={href} onClick={() => setMenuOpen(false)} style={{
+                display: 'block', padding: '0.75rem 0',
+                borderBottom: '1px solid var(--afp-border)',
+                fontSize: '1rem', color: 'var(--afp-text)',
               }}>
-                {t.nav.dashboard}
+                {label}
               </Link>
-              <button onClick={() => { setMenuOpen(false); handleSignOut() }} style={{
-                display: 'block', width: '100%', textAlign: 'left', padding: '0.65rem 0',
-                background: 'none', border: 'none', color: '#c0392b', fontSize: '0.95rem', cursor: 'pointer',
-              }}>
-                {locale === 'ru' ? 'Выйти' : 'Sign out'}
-              </button>
-            </>
-          ) : (
-            <>
-              <Link href={`/${locale}/auth/login`} onClick={() => setMenuOpen(false)} style={{
-                display: 'block', padding: '0.65rem 0',
-                borderBottom: '1px solid var(--afp-border)', fontSize: '0.95rem',
-              }}>
-                {t.nav.login}
-              </Link>
-              <Link href={`/${locale}/auth/register`} onClick={() => setMenuOpen(false)} style={{
-                display: 'block', padding: '0.65rem 0', fontSize: '0.95rem',
-              }}>
-                {t.nav.register}
-              </Link>
-            </>
-          )}
-        </div>
+            ))}
+            {session ? (
+              <>
+                <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} style={{
+                  display: 'block', padding: '0.75rem 0',
+                  borderBottom: '1px solid var(--afp-border)', fontSize: '1rem',
+                }}>
+                  {t.nav.dashboard}
+                </Link>
+                <button onClick={() => { setMenuOpen(false); handleSignOut() }} style={{
+                  display: 'block', width: '100%', textAlign: 'left', padding: '0.75rem 0',
+                  background: 'none', border: 'none', color: '#c0392b', fontSize: '1rem', cursor: 'pointer',
+                }}>
+                  {locale === 'ru' ? 'Выйти' : 'Sign out'}
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href={`/${locale}/auth/login`} onClick={() => setMenuOpen(false)} style={{
+                  display: 'block', padding: '0.75rem 0',
+                  borderBottom: '1px solid var(--afp-border)', fontSize: '1rem',
+                }}>
+                  {t.nav.login}
+                </Link>
+                <Link href={`/${locale}/auth/register`} onClick={() => setMenuOpen(false)} style={{
+                  display: 'block', padding: '0.75rem 0', fontSize: '1rem',
+                  color: 'var(--afp-green)', fontWeight: 600,
+                }}>
+                  {t.nav.register}
+                </Link>
+              </>
+            )}
+          </div>
+        </>
       )}
     </header>
   )
