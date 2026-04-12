@@ -76,8 +76,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             <div className="hero-photo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1000&h=800&fit=crop"
-                alt={isRu ? 'Медитация и осознанность' : 'Meditation and mindfulness'}
+                src="/hero.jpg"
+                alt={isRu ? 'Команда АФП' : 'AFP Team'}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
