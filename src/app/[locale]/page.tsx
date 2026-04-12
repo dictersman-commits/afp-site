@@ -267,13 +267,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                     display: 'flex', flexDirection: 'column',
                   }}>
                     {/* Cover image */}
-                    <div style={{ height: 140, position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ height: 200, position: 'relative', overflow: 'hidden', borderRadius: '14px 14px 0 0' }}>
                       {news.coverImage ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={news.coverImage}
                           alt={title}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }}
                         />
                       ) : (
                         <div style={{

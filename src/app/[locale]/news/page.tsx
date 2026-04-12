@@ -63,7 +63,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: L
                     {featured.coverImage ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={featured.coverImage} alt={title}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }} />
                     ) : (
                       <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--afp-blue), var(--afp-teal))' }} />
                     )}
@@ -122,7 +122,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: L
                         {news.coverImage ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img src={news.coverImage} alt={title}
-                            style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }} />
                         ) : (
                           <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--afp-blue), var(--afp-teal))' }} />
                         )}
