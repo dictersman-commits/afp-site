@@ -13,13 +13,91 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
 }
 
 const COUNCIL = [
-  { nameRu: 'Виктор Макаров',          nameEn: 'Viktor Makarov',          roleRu: 'Председатель Совета',  roleEn: 'Chairman of the Council', countryRu: 'Россия',    countryEn: 'Russia' },
-  { nameRu: 'Шанкар Гаутам',           nameEn: 'G. Shankar Gautam',       roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Индия',     countryEn: 'India' },
-  { nameRu: 'Гударзи',                 nameEn: 'Goodarzi',                roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Иран',      countryEn: 'Iran' },
-  { nameRu: 'Цян Мин Юэ',             nameEn: 'Qian Ming Yue',           roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Китай',     countryEn: 'China' },
-  { nameRu: 'Саски Йосинори',          nameEn: 'Sasaki Yoshinori',        roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Япония',    countryEn: 'Japan' },
-  { nameRu: 'Эдвард Чан',             nameEn: 'Edward Chan',             roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Гонконг',   countryEn: 'Hong Kong' },
-  { nameRu: 'Чжао Сюйдун',            nameEn: 'Zhao Xudong',             roleRu: 'Вице-президент',       roleEn: 'Vice-President',          countryRu: 'Китай',     countryEn: 'China' },
+  {
+    nameRu: 'Виктор Макаров',
+    nameEn: 'Viktor Makarov',
+    roleRu: 'Председатель Совета',
+    roleEn: 'Chairman of the Council',
+    countryRu: 'Россия',
+    countryEn: 'Russia',
+    bioRu: 'Доктор медицинских наук, профессор. Руководитель Центра психотерапии. Президент Профессиональной психотерапевтической лиги России. Ведущий специалист в области психотерапии и психологического консультирования.',
+    bioEn: 'Doctor of Medical Sciences, Professor. Head of the Psychotherapy Center. President of the Professional Psychotherapy League of Russia. Leading specialist in psychotherapy and psychological counseling.',
+    phone: '+7 (495) 675-15-63',
+    web: 'www.viktormakarov.ru',
+    photo: '/council/makarov.jpg',
+  },
+  {
+    nameRu: 'Г. Шанкар Гаутам',
+    nameEn: 'G. Shankar Gautam',
+    roleRu: 'Вице-президент',
+    roleEn: 'Vice-President',
+    countryRu: 'Индия',
+    countryEn: 'India',
+    bioRu: 'Директор Yogeshwar Psychotherapy and Acupuncture Institute (YPAI), г. Сагар. Специалист в области психотерапии и традиционной медицины, координатор научных исследований.',
+    bioEn: 'Director of the Yogeshwar Psychotherapy and Acupuncture Institute (YPAI), Sagar, M.P. Specialist in psychotherapy and traditional medicine, coordinator of scientific research.',
+    phone: '+91-7582-265539',
+    photo: '/council/shankar.jpg',
+  },
+  {
+    nameRu: 'Гуй Гударзи',
+    nameEn: 'Gui Goodarzi',
+    roleRu: 'Вице-президент',
+    roleEn: 'Vice-President',
+    countryRu: 'Иран',
+    countryEn: 'Iran',
+    bioRu: 'Руководитель психотерапевтических программ международного уровня. Представитель АФП в Иране.',
+    bioEn: 'Head of international-level psychotherapy programs. AFP representative in Iran.',
+    email: 'goodarzi@idro.org',
+    photo: '/council/gudarzi.jpg',
+  },
+  {
+    nameRu: 'Цян Мин Юэ',
+    nameEn: 'Qian Ming Yue',
+    roleRu: 'Вице-президент',
+    roleEn: 'Vice-President',
+    countryRu: 'Китай (Пекин)',
+    countryEn: 'China (Beijing)',
+    bioRu: 'Профессор психотерапии, директор центра психологического консультирования. Ведущий специалист в области клинической психологии Китая.',
+    bioEn: 'Professor of psychotherapy, director of the psychological counseling center. Leading specialist in clinical psychology in China.',
+    phone: '+86-10-62751093',
+    photo: '/council/kian.jpg',
+  },
+  {
+    nameRu: 'Саски Йосинори',
+    nameEn: 'Sasaki Yoshinori',
+    roleRu: 'Вице-президент',
+    roleEn: 'Vice-President',
+    countryRu: 'Япония (Токио)',
+    countryEn: 'Japan (Tokyo)',
+    bioRu: 'Профессор психотерапии и клинической психологии. Представитель Японии в Азиатской Федерации Психологов.',
+    bioEn: 'Professor of psychotherapy and clinical psychology. Japan representative in the Asian Federation of Psychologists.',
+    phone: '+81-3-3418-9303',
+    photo: '/council/sasaki.jpg',
+  },
+  {
+    nameRu: 'Эдвард Чан',
+    nameEn: 'Edward Chan',
+    roleRu: 'Вице-президент',
+    roleEn: 'Vice-President',
+    countryRu: 'Гонконг',
+    countryEn: 'Hong Kong',
+    bioRu: 'Психотерапевт, представитель АФП в Гонконге. Специалист в области интегративной психотерапии.',
+    bioEn: 'Psychotherapist, AFP representative in Hong Kong. Specialist in integrative psychotherapy.',
+    photo: '/council/edward_chan.jpg',
+  },
+  {
+    nameRu: 'Чжао Сюйдун',
+    nameEn: 'Zhao Xudong',
+    roleRu: 'Вице-президент',
+    roleEn: 'Vice-President',
+    countryRu: 'Китай (Шанхай)',
+    countryEn: 'China (Shanghai)',
+    bioRu: 'Руководитель исследовательской группы в области психотерапии и психологических наук. Представитель АФП в Шанхае.',
+    bioEn: 'Head of the research group in the field of psychotherapy and psychological sciences. AFP representative in Shanghai.',
+    phone: '+86-21-65988874',
+    email: 'zhaoxd62@gmail.com',
+    photo: '/council/zhao_xudong.jpg',
+  },
 ]
 
 const COUNTRIES_RU = ['Россия', 'Казахстан', 'Узбекистан', 'Кыргызия', 'Таджикистан', 'Монголия', 'Китай', 'Иран', 'ОАЭ', 'Саудовская Аравия']
@@ -151,36 +229,65 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--afp-blue)', marginBottom: '1.25rem' }}>
           {isRu ? 'Совет федерации' : 'Federation Council'}
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {COUNCIL.map((member, i) => (
             <div key={i} style={{
               background: '#fff', border: '1px solid var(--afp-border)',
-              borderRadius: 10, padding: '1.25rem',
-              display: 'flex', flexDirection: 'column', gap: '0.4rem',
+              borderRadius: 12, padding: '1.5rem',
+              display: 'flex', gap: '1.5rem', alignItems: 'flex-start',
             }}>
-              <div style={{
-                width: 44, height: 44, borderRadius: '50%',
-                background: i === 0 ? 'var(--afp-dark)' : 'var(--afp-green-light)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontWeight: 800, fontSize: '1rem',
-                color: i === 0 ? '#fff' : 'var(--afp-dark)',
-                marginBottom: '0.5rem',
-              }}>
-                {(isRu ? member.nameRu : member.nameEn).charAt(0)}
+              {/* Photo */}
+              <div style={{ flexShrink: 0 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={member.photo}
+                  alt={isRu ? member.nameRu : member.nameEn}
+                  style={{
+                    width: 90, height: 110, objectFit: 'cover',
+                    objectPosition: 'center top',
+                    borderRadius: 8,
+                    border: '2px solid var(--afp-green-light)',
+                  }}
+                />
               </div>
-              <div style={{ fontWeight: 700, color: 'var(--afp-dark)', fontSize: '0.95rem', lineHeight: 1.3 }}>
-                {isRu ? member.nameRu : member.nameEn}
-              </div>
-              <div style={{ color: 'var(--afp-muted)', fontSize: '0.8rem' }}>
-                {isRu ? member.roleRu : member.roleEn}
-              </div>
-              <div style={{
-                display: 'inline-block', marginTop: '0.25rem',
-                fontSize: '0.75rem', fontWeight: 600,
-                color: 'var(--afp-green)', borderLeft: '2px solid var(--afp-green)',
-                paddingLeft: '0.5rem',
-              }}>
-                {isRu ? member.countryRu : member.countryEn}
+              {/* Info */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                  <span style={{ fontWeight: 700, color: 'var(--afp-dark)', fontSize: '1rem' }}>
+                    {isRu ? member.nameRu : member.nameEn}
+                  </span>
+                  {i === 0 && (
+                    <span style={{
+                      fontSize: '0.7rem', fontWeight: 700, padding: '0.15rem 0.6rem',
+                      background: 'var(--afp-dark)', color: '#fff', borderRadius: 20,
+                    }}>
+                      {isRu ? 'Председатель' : 'Chairman'}
+                    </span>
+                  )}
+                </div>
+                <div style={{ color: 'var(--afp-muted)', fontSize: '0.82rem', marginBottom: '0.5rem' }}>
+                  {isRu ? member.roleRu : member.roleEn} · <span style={{ color: 'var(--afp-green)', fontWeight: 600 }}>{isRu ? member.countryRu : member.countryEn}</span>
+                </div>
+                <p style={{ color: 'var(--afp-text)', fontSize: '0.875rem', lineHeight: 1.7, margin: '0 0 0.75rem' }}>
+                  {isRu ? member.bioRu : member.bioEn}
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                  {'phone' in member && member.phone && (
+                    <a href={`tel:${member.phone}`} style={{ fontSize: '0.78rem', color: 'var(--afp-muted)' }}>
+                      📞 {member.phone}
+                    </a>
+                  )}
+                  {'email' in member && member.email && (
+                    <a href={`mailto:${member.email}`} style={{ fontSize: '0.78rem', color: 'var(--afp-muted)' }}>
+                      ✉ {member.email}
+                    </a>
+                  )}
+                  {'web' in member && member.web && (
+                    <a href={`https://${member.web}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.78rem', color: 'var(--afp-green)' }}>
+                      🌐 {member.web}
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
