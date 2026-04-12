@@ -273,7 +273,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                         <img
                           src={news.coverImage}
                           alt={title}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
                         />
                       ) : (
                         <div style={{
