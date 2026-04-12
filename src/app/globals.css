@@ -117,6 +117,22 @@ img { max-width: 100%; height: auto; }
 .section-pad   { padding: 4rem 1.5rem; }
 .section-pad-t { padding-top: 4rem; padding-bottom: 0; }
 
+/* Section header row (title + "все →" link) */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+.section-link {
+  color: var(--afp-green);
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* ========================
    TABLET (≤ 1024px)
    ======================== */

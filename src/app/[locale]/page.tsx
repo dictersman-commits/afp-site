@@ -191,11 +191,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       {upcomingEvents.length > 0 && (
         <section style={{ padding: '4rem 1.5rem', background: 'var(--afp-bg)' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <div className="section-header">
               <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-dark)', margin: 0 }}>
                 {t.home.events_title}
               </h2>
-              <Link href={`/${locale}/events`} style={{ color: 'var(--afp-green)', fontWeight: 600, fontSize: '0.9rem' }}>
+              <Link href={`/${locale}/events`} className="section-link">
                 {isRu ? 'Все мероприятия →' : 'All events →'}
               </Link>
             </div>
@@ -253,7 +253,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
               <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-dark)', margin: 0 }}>
                 {t.home.news_title}
               </h2>
-              <Link href={`/${locale}/news`} style={{ color: 'var(--afp-green)', fontWeight: 600, fontSize: '0.9rem' }}>
+              <Link href={`/${locale}/news`} className="section-link">
                 {isRu ? 'Все новости →' : 'All news →'}
               </Link>
             </div>
