@@ -43,7 +43,7 @@ export default function Header({ locale }: { locale: Locale }) {
             display: 'flex', alignItems: 'center', flexShrink: 0,
           }} aria-label="АФП — asianpsyche.org">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.svg" alt="АФП" style={{ height: 36, width: 'auto', display: 'block' }} />
+            <img src="/logo-afp.gif" alt="Asian Federation for Psychotherapy" style={{ height: 44, width: 'auto', display: 'block' }} />
           </Link>
 
           {/* Nav */}
