@@ -8,8 +8,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return {
     title: locale === 'ru' ? 'Каталог специалистов' : 'Specialist Catalog',
     description: locale === 'ru'
-      ? 'Найдите психолога или психотерапевта — члена Азиатской Федерации Психологов. Фильтры по стране и специализации.'
-      : 'Find a psychologist or psychotherapist — member of the Asian Federation of Psychologists.',
+      ? 'Найдите психолога или психотерапевта — члена Азиатской Федерации Психотерапии. Фильтры по стране и специализации.'
+      : 'Find a psychologist or psychotherapist — member of the Asian Federation of Psychotherapy.',
   }
 }
 
@@ -45,8 +45,8 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
       </h1>
       <p style={{ color: 'var(--afp-muted)', marginBottom: '2rem' }}>
         {locale === 'ru'
-          ? 'Проверенные специалисты — члены Азиатской Федерации Психологов'
-          : 'Verified specialists — members of the Asian Federation of Psychologists'}
+          ? 'Проверенные специалисты — члены Азиатской Федерации Психотерапии'
+          : 'Verified specialists — members of the Asian Federation of Psychotherapy'}
       </p>
       <CatalogClient members={parsed} locale={locale} t={t} />
     </div>

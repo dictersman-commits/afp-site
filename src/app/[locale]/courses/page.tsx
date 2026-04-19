@@ -33,7 +33,7 @@ export default async function CoursesPage({ params }: { params: Promise<{ locale
 
       <p style={{ fontSize: '1.05rem', color: 'var(--afp-muted)', lineHeight: 1.7, maxWidth: 560, margin: '0 auto 2rem' }}>
         {isRu
-          ? 'Курсы повышения квалификации, вебинары и учебные программы для членов Азиатской Федерации Психологов находятся во внешнем реестре.'
+          ? 'Курсы повышения квалификации, вебинары и учебные программы для членов Азиатской Федерации Психотерапии находятся во внешнем реестре.'
           : 'Professional development courses, webinars and training programs for AFP members are available in the external registry.'}
       </p>
 

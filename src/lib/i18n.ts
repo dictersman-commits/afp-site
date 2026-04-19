@@ -18,12 +18,12 @@ export const dict = {
       dashboard: 'Личный кабинет',
     },
     footer: {
-      tagline: 'Азиатская Федерация Психологов',
+      tagline: 'Азиатская Федерация Психотерапии',
       rights: 'Все права защищены',
       socials: 'Мы в соцсетях',
     },
     home: {
-      hero_title: 'Азиатская Федерация Психологов',
+      hero_title: 'Азиатская Федерация Психотерапии',
       hero_subtitle: 'Объединяем профессионалов психологии и психотерапии в Азии и мире',
       hero_cta: 'Вступить в АФП',
       hero_cta_secondary: 'Найти специалиста',
@@ -116,12 +116,12 @@ export const dict = {
       dashboard: 'Dashboard',
     },
     footer: {
-      tagline: 'Asian Federation of Psychologists',
+      tagline: 'Asian Federation of Psychotherapy',
       rights: 'All rights reserved',
       socials: 'Follow us',
     },
     home: {
-      hero_title: 'Asian Federation of Psychologists',
+      hero_title: 'Asian Federation of Psychotherapy',
       hero_subtitle: 'Uniting psychology and psychotherapy professionals across Asia and the world',
       hero_cta: 'Join AFP',
       hero_cta_secondary: 'Find a Specialist',

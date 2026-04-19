@@ -66,7 +66,7 @@ export default function RegisterPage() {
           {isRu ? 'Регистрация' : 'Registration'}
         </h1>
         <p style={{ color: 'var(--afp-muted)', textAlign: 'center', marginBottom: '2rem', fontSize: '0.9rem' }}>
-          {isRu ? 'Вступите в Азиатскую Федерацию Психологов' : 'Join the Asian Federation of Psychologists'}
+          {isRu ? 'Вступите в Азиатскую Федерацию Психотерапии' : 'Join the Asian Federation of Psychotherapy'}
         </p>
 
         {error && (

@@ -7,8 +7,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   const { locale } = await params
   return {
     title: locale === 'ru'
-      ? 'Азиатская Федерация Психологов — asianpsyche.org'
-      : 'Asian Federation of Psychologists — asianpsyche.org',
+      ? 'Азиатская Федерация Психотерапии — asianpsyche.org'
+      : 'Asian Federation of Psychotherapy — asianpsyche.org',
     description: locale === 'ru'
       ? 'Международная профессиональная организация психологов и психотерапевтов Азии.'
       : 'International professional organization of psychologists and psychotherapists of Asia.',

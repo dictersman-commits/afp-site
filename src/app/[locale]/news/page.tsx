@@ -8,8 +8,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return {
     title: locale === 'ru' ? 'Новости' : 'News',
     description: locale === 'ru'
-      ? 'Новости и публикации Азиатской Федерации Психологов.'
-      : 'News and publications of the Asian Federation of Psychologists.',
+      ? 'Новости и публикации Азиатской Федерации Психотерапии.'
+      : 'News and publications of the Asian Federation of Psychotherapy.',
   }
 }
 

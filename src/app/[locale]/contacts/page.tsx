@@ -7,8 +7,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return {
     title: locale === 'ru' ? 'Контакты' : 'Contacts',
     description: locale === 'ru'
-      ? 'Свяжитесь с Азиатской Федерацией Психологов. Форма обратной связи, соцсети.'
-      : 'Contact the Asian Federation of Psychologists. Feedback form and social media.',
+      ? 'Свяжитесь с Азиатской Федерацией Психотерапии. Форма обратной связи, соцсети.'
+      : 'Contact the Asian Federation of Psychotherapy. Feedback form and social media.',
   }
 }
 

@@ -7,8 +7,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return {
     title: locale === 'ru' ? 'О федерации' : 'About the Federation',
     description: locale === 'ru'
-      ? 'История, миссия и структура Азиатской Федерации Психологов. Членство во Всемирном совете по психотерапии.'
-      : 'History, mission and structure of the Asian Federation of Psychologists. Member of the World Council for Psychotherapy.',
+      ? 'История, миссия и структура Азиатской Федерации Психотерапии. Членство во Всемирном совете по психотерапии.'
+      : 'History, mission and structure of the Asian Federation of Psychotherapy. Member of the World Council for Psychotherapy.',
   }
 }
 
@@ -69,8 +69,8 @@ const COUNCIL = [
     roleEn: 'Vice-President',
     countryRu: 'Япония (Токио)',
     countryEn: 'Japan (Tokyo)',
-    bioRu: 'Профессор психотерапии и клинической психологии. Представитель Японии в Азиатской Федерации Психологов.',
-    bioEn: 'Professor of psychotherapy and clinical psychology. Japan representative in the Asian Federation of Psychologists.',
+    bioRu: 'Профессор психотерапии и клинической психологии. Представитель Японии в Азиатской Федерации Психотерапии.',
+    bioEn: 'Professor of psychotherapy and clinical psychology. Japan representative in the Asian Federation of Psychotherapy.',
     phone: '+81-3-3418-9303',
     photo: '/council/sasaki.jpg',
   },
@@ -167,8 +167,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </h2>
         <p style={{ lineHeight: 1.8, color: 'var(--afp-text)', fontSize: '1rem', marginBottom: '1rem' }}>
           {isRu
-            ? 'Азиатская Федерация Психологов (АФП) — международная профессиональная организация, объединяющая психологов, психотерапевтов и специалистов в области психического здоровья из стран Азии и СНГ.'
-            : 'The Asian Federation of Psychologists (AFP) is an international professional organization uniting psychologists, psychotherapists, and mental health professionals from Asian and CIS countries.'}
+            ? 'Азиатская Федерация Психотерапии (АФП) — международная профессиональная организация, объединяющая психологов, психотерапевтов и специалистов в области психического здоровья из стран Азии и СНГ.'
+            : 'The Asian Federation of Psychotherapy (AFP) is an international professional organization uniting psychologists, psychotherapists, and mental health professionals from Asian and CIS countries.'}
         </p>
         <p style={{ lineHeight: 1.8, color: 'var(--afp-text)', fontSize: '1rem' }}>
           {isRu

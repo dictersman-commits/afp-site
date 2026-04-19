@@ -9,8 +9,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return {
     title: locale === 'ru' ? 'Мероприятия' : 'Events',
     description: locale === 'ru'
-      ? 'Конференции, вебинары и семинары Азиатской Федерации Психологов. Запись онлайн.'
-      : 'Conferences, webinars and workshops of the Asian Federation of Psychologists.',
+      ? 'Конференции, вебинары и семинары Азиатской Федерации Психотерапии. Запись онлайн.'
+      : 'Conferences, webinars and workshops of the Asian Federation of Psychotherapy.',
   }
 }
 

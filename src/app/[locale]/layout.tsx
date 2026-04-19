@@ -6,7 +6,7 @@ import Footer from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Азиатская Федерация Психологов',
+    default: 'Азиатская Федерация Психотерапии',
     template: '%s | АФП',
   },
   description: 'Международная профессиональная организация психологов и психотерапевтов Азии',
