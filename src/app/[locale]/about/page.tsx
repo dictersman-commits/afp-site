@@ -303,12 +303,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           {(isRu ? [
             { title: 'Профессиональный профиль', desc: 'Личная страница в каталоге специалистов, видимая всем пользователям сайта' },
             { title: 'Льготы на мероприятия', desc: 'Скидки и приоритетный доступ к конференциям и вебинарам федерации' },
-            { title: 'Научная библиотека', desc: 'Доступ к профессиональным статьям и исследованиям от коллег из Азии' },
+            { title: 'Научный журнал', desc: 'Доступ к профессиональным статьям и исследованиям от коллег из Азии' },
             { title: 'Международная сеть', desc: 'Нетворкинг с психологами и психотерапевтами из 10+ стран региона' },
           ] : [
             { title: 'Professional profile', desc: 'Personal page in the specialist catalog, visible to all site users' },
             { title: 'Event discounts', desc: 'Discounts and priority access to federation conferences and webinars' },
-            { title: 'Scientific library', desc: 'Access to professional articles and research from colleagues across Asia' },
+            { title: 'Scientific Journal', desc: 'Access to professional articles and research from colleagues across Asia' },
             { title: 'International network', desc: 'Networking with psychologists and psychotherapists from 10+ countries' },
           ]).map(({ title, desc }) => (
             <div key={title} style={{

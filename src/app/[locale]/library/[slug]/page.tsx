@@ -23,7 +23,7 @@ export default async function ArticleDetailPage({
     <div style={{ maxWidth: 800, margin: '0 auto', padding: '3rem 1.5rem' }}>
       <div style={{ marginBottom: '1.5rem' }}>
         <Link href={`/${locale}/library`} style={{ color: 'var(--afp-teal)', fontSize: '0.9rem' }}>
-          ← {locale === 'ru' ? 'Библиотека' : 'Library'}
+          ← {locale === 'ru' ? 'Научный журнал' : 'Library'}
         </Link>
       </div>
 

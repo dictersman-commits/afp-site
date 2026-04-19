@@ -16,7 +16,7 @@ export default async function AdminArticlesPage({ params }: { params: Promise<{ 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
           <Link href={`/${locale}/admin`} style={{ color: 'var(--afp-teal)', fontSize: '0.9rem' }}>← Админ-панель</Link>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-blue)', marginTop: '0.5rem' }}>Статьи библиотеки</h1>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--afp-blue)', marginTop: '0.5rem' }}>Статьи журнала</h1>
         </div>
         <Link href={`/${locale}/admin/articles/new`} style={{
           padding: '0.6rem 1.25rem', background: 'var(--afp-blue)',

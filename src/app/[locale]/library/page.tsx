@@ -6,7 +6,7 @@ import LibraryClient from '@/components/library/LibraryClient'
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params
   return {
-    title: locale === 'ru' ? 'Библиотека' : 'Library',
+    title: locale === 'ru' ? 'Научный журнал' : 'Library',
     description: locale === 'ru'
       ? 'Научные статьи и публикации по психологии от специалистов из стран Азии.'
       : 'Scientific articles and publications on psychology from specialists across Asia.',
