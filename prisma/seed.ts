@@ -240,6 +240,25 @@ async function main() {
     console.log('Article created:', article.slug)
   }
 
+  // Council Members
+  const councilMembers = [
+    { order: 0, nameRu: 'Виктор Макаров', nameEn: 'Viktor Makarov', roleRu: 'Председатель Совета', roleEn: 'Chairman of the Council', countryRu: 'Россия', countryEn: 'Russia', bioRu: 'Доктор медицинских наук, профессор. Руководитель Центра психотерапии. Президент Профессиональной психотерапевтической лиги России.', bioEn: 'Doctor of Medical Sciences, Professor. Head of the Psychotherapy Center. President of the Professional Psychotherapy League of Russia.', phone: '+7 (495) 675-15-63', web: 'www.viktormakarov.ru', photo: '/council/makarov.jpg' },
+    { order: 1, nameRu: 'Г. Шанкар Гаутам', nameEn: 'G. Shankar Gautam', roleRu: 'Вице-президент', roleEn: 'Vice-President', countryRu: 'Индия', countryEn: 'India', bioRu: 'Директор Yogeshwar Psychotherapy and Acupuncture Institute (YPAI), г. Сагар. Специалист в области психотерапии и традиционной медицины.', bioEn: 'Director of the Yogeshwar Psychotherapy and Acupuncture Institute (YPAI), Sagar, M.P.', phone: '+91-7582-265539', photo: '/council/shankar.jpg' },
+    { order: 2, nameRu: 'Гуй Гударзи', nameEn: 'Gui Goodarzi', roleRu: 'Вице-президент', roleEn: 'Vice-President', countryRu: 'Иран', countryEn: 'Iran', bioRu: 'Руководитель психотерапевтических программ международного уровня. Представитель АФП в Иране.', bioEn: 'Head of international-level psychotherapy programs. AFP representative in Iran.', email: 'goodarzi@idro.org', photo: '/council/gudarzi.jpg' },
+    { order: 3, nameRu: 'Цян Мин Юэ', nameEn: 'Qian Ming Yue', roleRu: 'Вице-президент', roleEn: 'Vice-President', countryRu: 'Китай (Пекин)', countryEn: 'China (Beijing)', bioRu: 'Профессор психотерапии, директор центра психологического консультирования.', bioEn: 'Professor of psychotherapy, director of the psychological counseling center.', phone: '+86-10-62751093', photo: '/council/kian.jpg' },
+    { order: 4, nameRu: 'Саски Йосинори', nameEn: 'Sasaki Yoshinori', roleRu: 'Вице-президент', roleEn: 'Vice-President', countryRu: 'Япония (Токио)', countryEn: 'Japan (Tokyo)', bioRu: 'Профессор психотерапии и клинической психологии. Представитель Японии в АФП.', bioEn: 'Professor of psychotherapy and clinical psychology. Japan representative in AFP.', phone: '+81-3-3418-9303', photo: '/council/sasaki.jpg' },
+    { order: 5, nameRu: 'Эдвард Чан', nameEn: 'Edward Chan', roleRu: 'Вице-президент', roleEn: 'Vice-President', countryRu: 'Гонконг', countryEn: 'Hong Kong', bioRu: 'Психотерапевт, представитель АФП в Гонконге. Специалист в области интегративной психотерапии.', bioEn: 'Psychotherapist, AFP representative in Hong Kong. Specialist in integrative psychotherapy.', photo: '/council/edward_chan.jpg' },
+    { order: 6, nameRu: 'Чжао Сюйдун', nameEn: 'Zhao Xudong', roleRu: 'Вице-президент', roleEn: 'Vice-President', countryRu: 'Китай (Шанхай)', countryEn: 'China (Shanghai)', bioRu: 'Руководитель исследовательской группы в области психотерапии. Представитель АФП в Шанхае.', bioEn: 'Head of the research group in the field of psychotherapy. AFP representative in Shanghai.', phone: '+86-21-65988874', email: 'zhaoxd62@gmail.com', photo: '/council/zhao_xudong.jpg' },
+  ]
+  for (const m of councilMembers) {
+    await prisma.councilMember.upsert({
+      where: { id: m.nameEn.toLowerCase().replace(/\s/g, '-') },
+      update: m,
+      create: { id: m.nameEn.toLowerCase().replace(/\s/g, '-'), ...m },
+    })
+    console.log('Council member:', m.nameRu)
+  }
+
   console.log('\nSeeding completed!')
   console.log('Admin login: admin@asianpsyche.org / admin123')
   console.log('Member login: ivanova@example.com / member123')

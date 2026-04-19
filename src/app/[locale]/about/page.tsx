@@ -12,94 +12,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   }
 }
 
-const COUNCIL = [
-  {
-    nameRu: 'Виктор Макаров',
-    nameEn: 'Viktor Makarov',
-    roleRu: 'Председатель Совета',
-    roleEn: 'Chairman of the Council',
-    countryRu: 'Россия',
-    countryEn: 'Russia',
-    bioRu: 'Доктор медицинских наук, профессор. Руководитель Центра психотерапии. Президент Профессиональной психотерапевтической лиги России. Ведущий специалист в области психотерапии и психологического консультирования.',
-    bioEn: 'Doctor of Medical Sciences, Professor. Head of the Psychotherapy Center. President of the Professional Psychotherapy League of Russia. Leading specialist in psychotherapy and psychological counseling.',
-    phone: '+7 (495) 675-15-63',
-    web: 'www.viktormakarov.ru',
-    photo: '/council/makarov.jpg',
-  },
-  {
-    nameRu: 'Г. Шанкар Гаутам',
-    nameEn: 'G. Shankar Gautam',
-    roleRu: 'Вице-президент',
-    roleEn: 'Vice-President',
-    countryRu: 'Индия',
-    countryEn: 'India',
-    bioRu: 'Директор Yogeshwar Psychotherapy and Acupuncture Institute (YPAI), г. Сагар. Специалист в области психотерапии и традиционной медицины, координатор научных исследований.',
-    bioEn: 'Director of the Yogeshwar Psychotherapy and Acupuncture Institute (YPAI), Sagar, M.P. Specialist in psychotherapy and traditional medicine, coordinator of scientific research.',
-    phone: '+91-7582-265539',
-    photo: '/council/shankar.jpg',
-  },
-  {
-    nameRu: 'Гуй Гударзи',
-    nameEn: 'Gui Goodarzi',
-    roleRu: 'Вице-президент',
-    roleEn: 'Vice-President',
-    countryRu: 'Иран',
-    countryEn: 'Iran',
-    bioRu: 'Руководитель психотерапевтических программ международного уровня. Представитель АФП в Иране.',
-    bioEn: 'Head of international-level psychotherapy programs. AFP representative in Iran.',
-    email: 'goodarzi@idro.org',
-    photo: '/council/gudarzi.jpg',
-  },
-  {
-    nameRu: 'Цян Мин Юэ',
-    nameEn: 'Qian Ming Yue',
-    roleRu: 'Вице-президент',
-    roleEn: 'Vice-President',
-    countryRu: 'Китай (Пекин)',
-    countryEn: 'China (Beijing)',
-    bioRu: 'Профессор психотерапии, директор центра психологического консультирования. Ведущий специалист в области клинической психологии Китая.',
-    bioEn: 'Professor of psychotherapy, director of the psychological counseling center. Leading specialist in clinical psychology in China.',
-    phone: '+86-10-62751093',
-    photo: '/council/kian.jpg',
-  },
-  {
-    nameRu: 'Саски Йосинори',
-    nameEn: 'Sasaki Yoshinori',
-    roleRu: 'Вице-президент',
-    roleEn: 'Vice-President',
-    countryRu: 'Япония (Токио)',
-    countryEn: 'Japan (Tokyo)',
-    bioRu: 'Профессор психотерапии и клинической психологии. Представитель Японии в Азиатской Федерации Психотерапии.',
-    bioEn: 'Professor of psychotherapy and clinical psychology. Japan representative in the Asian Federation of Psychotherapy.',
-    phone: '+81-3-3418-9303',
-    photo: '/council/sasaki.jpg',
-  },
-  {
-    nameRu: 'Эдвард Чан',
-    nameEn: 'Edward Chan',
-    roleRu: 'Вице-президент',
-    roleEn: 'Vice-President',
-    countryRu: 'Гонконг',
-    countryEn: 'Hong Kong',
-    bioRu: 'Психотерапевт, представитель АФП в Гонконге. Специалист в области интегративной психотерапии.',
-    bioEn: 'Psychotherapist, AFP representative in Hong Kong. Specialist in integrative psychotherapy.',
-    photo: '/council/edward_chan.jpg',
-  },
-  {
-    nameRu: 'Чжао Сюйдун',
-    nameEn: 'Zhao Xudong',
-    roleRu: 'Вице-президент',
-    roleEn: 'Vice-President',
-    countryRu: 'Китай (Шанхай)',
-    countryEn: 'China (Shanghai)',
-    bioRu: 'Руководитель исследовательской группы в области психотерапии и психологических наук. Представитель АФП в Шанхае.',
-    bioEn: 'Head of the research group in the field of psychotherapy and psychological sciences. AFP representative in Shanghai.',
-    phone: '+86-21-65988874',
-    email: 'zhaoxd62@gmail.com',
-    photo: '/council/zhao_xudong.jpg',
-  },
-]
-
 const COUNTRIES_RU = ['Россия', 'Казахстан', 'Узбекистан', 'Кыргызия', 'Таджикистан', 'Монголия', 'Китай', 'Иран', 'ОАЭ', 'Саудовская Аравия']
 const COUNTRIES_EN = ['Russia', 'Kazakhstan', 'Uzbekistan', 'Kyrgyzstan', 'Tajikistan', 'Mongolia', 'China', 'Iran', 'UAE', 'Saudi Arabia']
 
@@ -126,9 +38,10 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const t = getDict(locale)
   const isRu = locale === 'ru'
 
-  const [membersCount, eventsCount] = await Promise.all([
+  const [membersCount, eventsCount, council] = await Promise.all([
     prisma.member.count({ where: { isPublic: true } }),
     prisma.event.count({ where: { published: true } }),
+    prisma.councilMember.findMany({ orderBy: { order: 'asc' } }),
   ])
 
   const countries = isRu ? COUNTRIES_RU : COUNTRIES_EN
@@ -230,7 +143,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           {isRu ? 'Совет федерации' : 'Federation Council'}
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {COUNCIL.map((member, i) => (
+          {council.map((member, i) => (
             <div key={i} style={{
               background: '#fff', border: '1px solid var(--afp-border)',
               borderRadius: 12, padding: '1.5rem',
@@ -240,7 +153,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <div style={{ flexShrink: 0 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={member.photo}
+                  src={member.photo ?? ''}
                   alt={isRu ? member.nameRu : member.nameEn}
                   style={{
                     width: 90, height: 110, objectFit: 'cover',
@@ -272,17 +185,17 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   {isRu ? member.bioRu : member.bioEn}
                 </p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-                  {'phone' in member && member.phone && (
+                  {member.phone && (
                     <a href={`tel:${member.phone}`} style={{ fontSize: '0.78rem', color: 'var(--afp-muted)' }}>
                       📞 {member.phone}
                     </a>
                   )}
-                  {'email' in member && member.email && (
+                  {member.email && (
                     <a href={`mailto:${member.email}`} style={{ fontSize: '0.78rem', color: 'var(--afp-muted)' }}>
                       ✉ {member.email}
                     </a>
                   )}
-                  {'web' in member && member.web && (
+                  {member.web && (
                     <a href={`https://${member.web}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.78rem', color: 'var(--afp-green)' }}>
                       🌐 {member.web}
                     </a>

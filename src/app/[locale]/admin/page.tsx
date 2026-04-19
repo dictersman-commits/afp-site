@@ -13,7 +13,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
     redirect(`/${locale}/dashboard`)
   }
 
-  const [usersCount, membersCount, eventsCount, newsCount, articlesCount, registrationsCount] =
+  const [usersCount, membersCount, eventsCount, newsCount, articlesCount, registrationsCount, councilCount] =
     await Promise.all([
       prisma.user.count(),
       prisma.member.count(),
@@ -21,6 +21,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
       prisma.news.count(),
       prisma.article.count(),
       prisma.eventRegistration.count(),
+      prisma.councilMember.count(),
     ])
 
   const recentNews = await prisma.news.findMany({
@@ -42,6 +43,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
     { label: locale === 'ru' ? 'Регистрации' : 'Registrations', value: registrationsCount, href: `/${locale}/admin/registrations` },
     { label: locale === 'ru' ? 'Новости' : 'News', value: newsCount, href: `/${locale}/admin/news` },
     { label: locale === 'ru' ? 'Статьи' : 'Articles', value: articlesCount, href: `/${locale}/admin/articles` },
+    { label: locale === 'ru' ? 'Совет федерации' : 'Council', value: councilCount, href: `/${locale}/admin/council` },
   ]
 
   return (

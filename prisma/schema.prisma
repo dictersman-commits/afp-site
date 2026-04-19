@@ -95,6 +95,25 @@ model News {
   updatedAt  DateTime @updatedAt
 }
 
+model CouncilMember {
+  id          String   @id @default(cuid())
+  nameRu      String
+  nameEn      String
+  roleRu      String
+  roleEn      String
+  countryRu   String
+  countryEn   String
+  bioRu       String?
+  bioEn       String?
+  photo       String?
+  phone       String?
+  email       String?
+  web         String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model Ad {
   id          String    @id @default(cuid())
   title       String
